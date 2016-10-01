@@ -6,33 +6,45 @@ import java.util.Map;
 import model.Customer;
 
 public class CustomerService {
-	
-	 private Map<String, Customer> customers;
-	//Map<Å°,¹ë·ù>
+	private static final CustomerService instance = new CustomerService();
 
-	public CustomerService() {
+	private Map<String, Customer> customers;
+
+
+	private CustomerService() {
 		customers = new HashMap<String, Customer>();
-		
-		addCustomer(new Customer("id001","Alice","alice.hansung.ac.kr"));
-		addCustomer(new Customer("id002","Bob","bob.hansung.ac.kr"));
-		addCustomer(new Customer("id003","Charlie","charlie.hansung.ac.kr"));
-		addCustomer(new Customer("id004","David","david.hansung.ac.kr"));
-		addCustomer(new Customer("id005","Trudy","trudy.hansung.ac.kr"));
-		
-		
-		
 	}
-	 
-	public void addCustomer(Customer customer){
+
+	public static CustomerService getInstance() {
+		return instance;
+	}
+
+	public void addCustomer(Customer customer) {
 		customers.put(customer.getId(), customer);
 	}
-	
-	public Customer findCustomer(String id){
-		if(id !=null)
-			return(customers.get(id.toLowerCase()));
+
+	public boolean checkCustomer(Customer customer) {
+		if( customer.getId().isEmpty()||customer.getPassword().isEmpty())
+			return false;
+		else
+			return true;
+		
+	}
+
+	public Customer findCustomer(String id) {
+		if (id != null)
+			return customers.get(id.toLowerCase());
 		else
 			return null;
 	}
-	
+
+	public Customer login(String id, String password) {
+		Customer registedCustomer = findCustomer(id);
+
+		if (registedCustomer != null && registedCustomer.getPassword().equals(password))
+			return registedCustomer;
+		else
+			return null;
+	}
 
 }

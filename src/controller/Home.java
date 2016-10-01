@@ -32,10 +32,10 @@ public class Home extends HttpServlet {
 		
 		String page = null;
 		
-		if(action.equals("login"))
+		if(action.equals("loginform"))
 			page="/view/loginform.jsp";
-		else if(action.equals("help"))
-			page="/view/help.jsp";
+		else if(action.equals("registerform"))
+			page="/view/registerform.jsp";
 		else
 			page="/view/error.jsp";
 		

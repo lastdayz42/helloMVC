@@ -32,31 +32,25 @@ public class DoLogin extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CustomerService service = CustomerService.getInstance();
 		
-		String customerId = request.getParameter("customerId");
-		//Perform business logic. => Return a bean as a result.
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
 		
-		CustomerService service = new CustomerService();
-		Customer customer = service.findCustomer(customerId);
-		request.setAttribute("customer", customer);
-		
-		//We can iterate over lists using forEach in JSTL
-		
-		List<Customer> customers = new ArrayList<>();
-		customers.add(new Customer("id006","Kim","kim.hansung.ac.kr"));
-		customers.add(new Customer("id007","Lee","lee.hansung.ac.kr"));
-		customers.add(new Customer("id008","Park","park.hansung.ac.kr"));
-		request.setAttribute("CustomerList", customers);
-		
-		
-		
+
+		Customer customer_login = service.login(id,password);
+
 		String page;
 		
-		if(customer==null)
-			page="/view/error.jsp";
-		else
-			page="/view/success.jsp";
+		if(customer_login==null){
+			page="/view/loginFail.jsp";
+			request.setAttribute("id", id);
+		}
+		else{
+			page="/view/loginsuccess.jsp";
+			request.setAttribute("customer", customer_login);
+		}
 		
 		RequestDispatcher dispatcher= request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
