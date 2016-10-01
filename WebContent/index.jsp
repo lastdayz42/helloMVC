@@ -14,7 +14,7 @@ This is the homepage for shopping
 	</p>
 
 	<p>
-		<a href="/helloMVC/home?action=help"> go to help page</a>
+		<a href="/helloMVC/home?action=help"> go to register page</a>
 	</p>
 
 
