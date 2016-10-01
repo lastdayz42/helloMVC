@@ -10,7 +10,7 @@
 	<h1>Regist Fail</h1>
 
 	<p>
-		<a href="/helloMVC/index.jsp"> go to home page</a>
+		<a href="/helloMVC/index.jsp"> go to home page, try again</a>
 	</p>
 
 

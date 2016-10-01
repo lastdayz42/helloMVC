@@ -45,16 +45,18 @@ public class DoRegister extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		
-		Customer customer_new = new Customer(id, password, gender, name, email);
+		Customer customer= new Customer(id, password, gender, name, email);
 
 		String page;
 
-		if (service.checkCustomer(customer_new)) {
+		if (service.checkCustomer(customer)) {
+			service.addCustomer(customer);
 			page = "/view/registerSuccess.jsp";
-			request.setAttribute("customer", customer_new);
-		} else	
-			page = "/view/error.jsp";
-
+			request.setAttribute("customer", customer);
+		} else{
+			page = "/view/error.jsp";	
+		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}

@@ -7,7 +7,6 @@ import model.Customer;
 
 public class CustomerService {
 	private static final CustomerService instance = new CustomerService();
-
 	private Map<String, Customer> customers;
 
 
@@ -24,11 +23,10 @@ public class CustomerService {
 	}
 
 	public boolean checkCustomer(Customer customer) {
-		if( customer.getId().isEmpty()||customer.getPassword().isEmpty())
+		if(customer.getId().isEmpty()||customer.getPassword().isEmpty())
 			return false;
 		else
 			return true;
-		
 	}
 
 	public Customer findCustomer(String id) {
@@ -39,12 +37,14 @@ public class CustomerService {
 	}
 
 	public Customer login(String id, String password) {
-		Customer registedCustomer = findCustomer(id);
+		Customer customer = findCustomer(id);
 
-		if (registedCustomer != null && registedCustomer.getPassword().equals(password))
-			return registedCustomer;
-		else
+		if (customer != null && customer.getPassword().equals(password)){
+			return customer;
+		}
+		else{
 			return null;
+		}
 	}
 
 }
